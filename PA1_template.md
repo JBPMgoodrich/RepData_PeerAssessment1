@@ -29,7 +29,7 @@ attach(data)
 detach(data)
 
 attach(sOnDate)
-      hist(steps)
+      hist(steps ,main = "Figure 1 - Total steps taken each day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
@@ -54,6 +54,12 @@ attach(sOnDate)
 detach(sOnDate)
 ```
   
+### Analysis results:
+#### &nbsp;&nbsp;&nbsp;&nbsp; Mean of total steps taken each day: 10766.1886792453
+#### &nbsp;&nbsp;&nbsp;&nbsp; Median of total steps taken each day: 10765
+#### &nbsp;&nbsp;&nbsp;&nbsp; For histogram of total steps taken each day, see accompanying Figure 1
+<br>
+
   
 ## What is the average daily activity pattern?  
   (III) 1. Time series plot of interval (x-axis) and average steps taken, across days (y-axis)  
@@ -73,7 +79,8 @@ attach(sInIntervalAvg)
       #     convert interval hmm to minutes using by adding modulo(interval,100) to 60*floor(interval/100)
       #
       plot( (60 * interval %/%100 + (interval %%100) ), steps ,type="l" 
-            , xlab="beginning of 5-minute interval in minutes after midnight")
+            , xlab="beginning of 5-minute interval in minutes after midnight"
+            , main = "Figure 2 - Time series steps by interval")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
@@ -108,7 +115,12 @@ detach(sInIntervalAvg)
       #
       # previous <paste("5-minute interval during day when most steps taken on average:", intervalMaxSteps)> skewed
 ```
-  
+
+### Analysis results:
+#### &nbsp;&nbsp;&nbsp;&nbsp; 5-minute interval of day (on 24-hour clock) during which most steps taken begins at: 8:35
+#### &nbsp;&nbsp;&nbsp;&nbsp; For time series showing steps averaged across days by 5-minute interval, see accompanying Figure 2
+<br>
+
   
 ## Imputing missing values
   1. Report number of missing values in dataset (i.e. the total number of rows with NAs)  
@@ -159,7 +171,7 @@ attach(data2)
 detach(data2)
 
 attach(sOnDate2)
-      hist(steps)
+      hist(steps ,main = "Figure 3 - Total steps taken each day after imputed data added")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
@@ -184,6 +196,18 @@ attach(sOnDate2)
 detach(sOnDate2)
 ```
 
+### Analysis results:
+#### &nbsp;&nbsp;&nbsp;&nbsp; Number of missing values (for steps): 2304
+#### &nbsp;&nbsp;&nbsp;&nbsp; Mean of total steps taken each day after imputed data added: 10766.1886792453
+#### &nbsp;&nbsp;&nbsp;&nbsp; Median of total steps taken each day after imputed data added: 10766.1886792453
+#### &nbsp;&nbsp;&nbsp;&nbsp; For histogram of total steps taken each day after imputed data added, see accompanying Figure 3
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The mean value does not differ after imputed data added
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; However, the median value moves closer to (in this case exactly to) the mean
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Comparing histograms in Figure 3 and Figure 2 also shows impact of adding imputed data
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The distribution is changed shown by the rise in bar associated with the mean value
+<br>
+
+  
 ## Are there differences in activity patterns between weekdays and weekends?
   1. Create factor variable with levels "weekday" and "weekend"
   2. Create panel plot "weekday"" versus "weekend": line plot of y=average steps and x=5-minute intervals (like III.1.)
