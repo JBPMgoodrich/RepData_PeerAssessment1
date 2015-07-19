@@ -1,5 +1,5 @@
 # Reproducible Research: Peer Assessment 1
-  
+
   
 ## Loading and preprocessing the data
   
@@ -29,7 +29,7 @@ attach(data)
 detach(data)
 
 attach(sOnDate)
-      hist(steps ,main = "Figure 1 - Total steps taken each day")
+      hist(steps ,main = "Figure 1 : Total steps taken each day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
@@ -80,14 +80,12 @@ attach(sInIntervalAvg)
       #
       plot( (60 * interval %/%100 + (interval %%100) ), steps ,type="l" 
             , xlab="beginning of 5-minute interval in minutes after midnight"
-            , main = "Figure 2 - Time series steps by interval")
+            , main = "Figure 2 : Time series steps by interval")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
 
 ```r
-      #
-      ### previous <plot(interval, steps ,type="l")> was skewed
 detach(sInIntervalAvg)
 
 ## 5-minute interval, on average across days, that contains maximum number of steps
@@ -171,7 +169,7 @@ attach(data2)
 detach(data2)
 
 attach(sOnDate2)
-      hist(steps ,main = "Figure 3 - Total steps taken each day after imputed data added")
+      hist(steps ,main = "Figure 3 : Total steps taken each day after imputed data added")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
@@ -245,10 +243,14 @@ xyplot(steps~(60 * interval %/%100 + (interval %%100) ) |weekday2, sInIntervalAv
        ,type= "l"
        ,xlab="interval in minutes from midnight"
        ,layout=c(1,2)
-       , main= "Figure 4 - Weekday versus weekend activity")
+       , main= "Figure 4 : Weekday versus weekend activity")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-7-1.png) 
+
+```r
+## Final code, I think
+```
 
 ### Analysis results and observations on activity patterns
 #### &nbsp;&nbsp;&nbsp;&nbsp; For time series showing steps per interval on weekday versus weekend, see accompanying Figure 4

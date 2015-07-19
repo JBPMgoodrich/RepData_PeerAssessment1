@@ -4,7 +4,7 @@ output:
   html_document:
     keep_md: true
 ---
-  
+
   
 ## Loading and preprocessing the data
   
@@ -32,7 +32,7 @@ attach(data)
 detach(data)
 
 attach(sOnDate)
-      hist(steps ,main = "Figure 1 - Total steps taken each day")
+      hist(steps ,main = "Figure 1 : Total steps taken each day")
 
       paste("Mean of total steps taken each day:", mean(steps))
       paste("Median of total steps taken each day:", median(steps))
@@ -64,9 +64,7 @@ attach(sInIntervalAvg)
       #
       plot( (60 * interval %/%100 + (interval %%100) ), steps ,type="l" 
             , xlab="beginning of 5-minute interval in minutes after midnight"
-            , main = "Figure 2 - Time series steps by interval")
-      #
-      ### previous <plot(interval, steps ,type="l")> was skewed
+            , main = "Figure 2 : Time series steps by interval")
 detach(sInIntervalAvg)
 
 ## 5-minute interval, on average across days, that contains maximum number of steps
@@ -133,7 +131,7 @@ attach(data2)
 detach(data2)
 
 attach(sOnDate2)
-      hist(steps ,main = "Figure 3 - Total steps taken each day after imputed data added")
+      hist(steps ,main = "Figure 3 : Total steps taken each day after imputed data added")
       
       paste("Mean of total steps taken each day:", mean(steps))
       paste("Median of total steps taken each day:", median(steps))
@@ -188,8 +186,9 @@ xyplot(steps~(60 * interval %/%100 + (interval %%100) ) |weekday2, sInIntervalAv
        ,type= "l"
        ,xlab="interval in minutes from midnight"
        ,layout=c(1,2)
-       , main= "Figure 4 - Weekday versus weekend activity")
+       , main= "Figure 4 : Weekday versus weekend activity")
 
+## Final code, I think
 ```  
 
 ### Analysis results and observations on activity patterns
