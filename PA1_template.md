@@ -63,7 +63,7 @@ detach(sOnDate)
   
 ## What is the average daily activity pattern?  
   (III) 1. Time series plot of interval (x-axis) and average steps taken, across days (y-axis)  
-  (III) 2. 5-minute interval, on average across days, that contains maximum number of steps  
+      2. 5-minute interval, on average across days, that contains maximum number of steps  
   
 
 ```r
@@ -196,7 +196,9 @@ attach(sOnDate2)
 detach(sOnDate2)
 ```
 
-### Analysis results:
+### Method for addition of imputed data:
+#### &nbsp;&nbsp;&nbsp;&nbsp; Missing values for steps were replaced using the average steps for the same interval calculated across days
+### Analysis results and observations on addition of imputed data:
 #### &nbsp;&nbsp;&nbsp;&nbsp; Number of missing values (for steps): 2304
 #### &nbsp;&nbsp;&nbsp;&nbsp; Mean of total steps taken each day after imputed data added: 10766.1886792453
 #### &nbsp;&nbsp;&nbsp;&nbsp; Median of total steps taken each day after imputed data added: 10766.1886792453
@@ -204,7 +206,7 @@ detach(sOnDate2)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The mean value does not differ after imputed data added
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; However, the median value moves closer to (in this case exactly to) the mean
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Comparing histograms in Figure 3 and Figure 2 also shows impact of adding imputed data
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The distribution is changed shown by the rise in bar associated with the mean value
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The distribution is changed as shown by the rise in bar associated with the mean value
 <br>
 
   
@@ -214,5 +216,43 @@ detach(sOnDate2)
   
 
 ```r
-# see t.R for work in progress
+## create string of weekdays and use to set variable weekday to 1 (weekday) and 0 (weekend)
+#
+weekdayList<- "MondayTuesdayWednesdayThursdayFriday"
+for( i in 1:length(data2$date) ) {
+      data2$weekday[i]<-sum( grep(weekdays( as.Date(data2$date[i]) ), weekdayList) )
+}
+
+## create factor variable weekday2 and set level 0 (element 1) to "Weekend" and level 1 (element 2) to "Weekday"
+#
+data2$weekday2<- as.factor(data2$weekday)
+levels(data2$weekday2)[1]<- "Weekend"
+levels(data2$weekday2)[2]<- "Weekday"
+
+## create time series plot like earlier one: interval (x-axis) and average steps taken, across days (y-axis)
+##   but create as panel plot comparing weekday versus weekend patterns
+#
+attach(data2)
+# steps in a given Interval, separate values for weekday versus weekend, averaged across all dates
+#
+sInIntervalAvg2<- aggregate(steps~interval+weekday2 ,FUN=mean)     
+detach(data2)
+
+## Time series plot of interval (x-axis) and average steps taken, across days (y-axis), distinguishing weekday and weekend
+#
+library(lattice)
+xyplot(steps~(60 * interval %/%100 + (interval %%100) ) |weekday2, sInIntervalAvg2
+       ,type= "l"
+       ,xlab="interval in minutes from midnight"
+       ,layout=c(1,2)
+       , main= "Figure 4 - Weekday versus weekend activity")
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png) 
+
+### Analysis results and observations on activity patterns
+#### &nbsp;&nbsp;&nbsp;&nbsp; For time series showing steps per interval on weekday versus weekend, see accompanying Figure 4
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Comparing histograms in Figure 4 shows difference of pattern
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Weekend activity shows more constant activity, and starts and ends later
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Weekday activity shows a clear maximum near start of typical work day
+<br>
